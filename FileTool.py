@@ -3,6 +3,7 @@ import numpy as np
 
 class crudCSV:
 
+
     def __init__(self,path,fields = None):
         if fields is not None: #Yeni bir CSV oluşturacaksak kullanılacak constructor
             self.path = path
