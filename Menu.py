@@ -23,18 +23,24 @@ class TerminalMenu:
     def operationsMenu(self,csvObj):
         print("Operation list")
         print("-Press 1 for read the CSV file \n-Press 2 for add row to the CSV file \n-Press 3 for delete row from the CSV file")
-        print("-Press 4 for update row on the CSV file \n-Press 5  for search on the CSV file  \n-Press 6 for copy all data to another CSV file")
-        print("-Press 4 for search on the CSV file \n-Press 5 for update row on the CSV file \n-Press 6 for copy all data to another CSV file")
+        print("-Press 4 for update row on the CSV file \n-Press 5 for search on the CSV file  \n-Press 6 for for CSV file convert to JSON format")
+        print("-Press 7 for save CSV file as JSON file")
         x = input()
         if(x == "1"):
             print(csvObj.getCSV())
+            self.escapeMenu(csvObj)
         elif(x == "2"):
             self.insertMenu(csvObj)
         elif(x == "3"):
             self.deleteMenu(csvObj)
         elif(x == "4"):
             self.updateMenu(csvObj)
-
+        elif(x == "5"):
+            self.searchMenu(csvObj)
+        elif(x == "6"):
+            self.jsonFormMenu(csvObj)
+        elif(x == "7"):
+            self.jsonSaveMenu(csvObj)
 
     def insertMenu(self, csvObj):
         print("Enter the data you want to add in the column order, with spaces in between.")
@@ -42,6 +48,7 @@ class TerminalMenu:
         print("Data for add: ", end = "")
         x = input()
         csvObj.addData(x.split())
+        self.escapeMenu(csvObj)
 
     def deleteMenu(self, csvObj):
         print(csvObj.getCSV())
@@ -49,6 +56,7 @@ class TerminalMenu:
         print("Index number :", end = "")
         x = input()
         csvObj.deleteData(int(x))
+        self.escapeMenu(csvObj)
 
     def updateMenu(self, csvObj):
         print(csvObj.getCSV())
@@ -60,6 +68,41 @@ class TerminalMenu:
         print("New data: ", end="")
         data = input()
         csvObj.updateByIndex(int(index),column,data)
+        self.escapeMenu(csvObj)
+
+    def searchMenu(self, csvObj):
+        print("Enter the column you want to search")
+        print("Columns: ", csvObj.getColumns())
+        print("Column for search: ", end = "")
+        column = input()
+        print("Enter the key value you want to search by the column")
+        print("Value for search: ", end="")
+        value = input()
+        csvObj.searchData(column,value)
+        self.escapeMenu(csvObj)
+
+    def jsonFormMenu(self, csvObj):
+        csvObj.convertToJson()
+        self.escapeMenu(csvObj)
+
+    def jsonSaveMenu(self, csvObj):
+        print("Enter the path.")
+        print("Path: ", end="")
+        path = input()
+        csvObj.exportToJsonFile(path)
+        self.escapeMenu(csvObj)
+
+    def escapeMenu(self, csvObj):
+        print("Press 1 for to Main Menu \nPress 2 for to Operations Menu")
+        x = input()
+        if(x == "1"):
+            self.showMainMenu()
+        elif(x == "2"):
+            self.operationsMenu(csvObj)
+
+
+
+
 
 
 
