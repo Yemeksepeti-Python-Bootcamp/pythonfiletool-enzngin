@@ -1,5 +1,4 @@
 import FileTool as ft
-
 class TerminalMenu:
 
     def showMainMenu(self):
@@ -27,8 +26,7 @@ class TerminalMenu:
         print("-Press 7 for save CSV file as JSON file")
         x = input()
         if(x == "1"):
-            print(csvObj.getCSV())
-            self.escapeMenu(csvObj)
+           self.readMenu(csvObj)
         elif(x == "2"):
             self.insertMenu(csvObj)
         elif(x == "3"):
@@ -41,6 +39,10 @@ class TerminalMenu:
             self.jsonFormMenu(csvObj)
         elif(x == "7"):
             self.jsonSaveMenu(csvObj)
+
+    def readMenu(self,csvObj):
+        print(csvObj.getCSV())
+        self.escapeMenu(csvObj)
 
     def insertMenu(self, csvObj):
         print("Enter the data you want to add in the column order, with spaces in between.")
@@ -93,12 +95,14 @@ class TerminalMenu:
         self.escapeMenu(csvObj)
 
     def escapeMenu(self, csvObj):
-        print("Press 1 for to Main Menu \nPress 2 for to Operations Menu")
+        print("Press 1 for to Main Menu \nPress 2 for to Operations Menu \nPress q for quit program")
         x = input()
         if(x == "1"):
             self.showMainMenu()
         elif(x == "2"):
             self.operationsMenu(csvObj)
+        elif(x == "q"):
+            pass
 
 
 
